@@ -1,0 +1,192 @@
+{
+  "comment": "Produced by the training side. The serving side replays these authorizations and must agree. Regenerate with `make train`; a change here is a change in signal semantics and should be read as one.",
+  "signal_set": [
+    "amount",
+    "gap_seconds",
+    "velocity_1h",
+    "velocity_24h"
+  ],
+  "velocity_windows_seconds": {
+    "velocity_1h": 3600,
+    "velocity_24h": 86400
+  },
+  "risk_score_tolerance": 1e-09,
+  "cases": [
+    {
+      "name": "boundary-exactly-on-velocity_1h",
+      "authorization": {
+        "transaction_id": "af4afa3a825683ef975472752b813802",
+        "card": "4961003488432306",
+        "event_time": 1381558193,
+        "amount_usd": 79.42
+      },
+      "signals": {
+        "amount": 79.42,
+        "gap_seconds": 431.0,
+        "velocity_1h": 2.0,
+        "velocity_24h": 5.0
+      },
+      "risk_score": 0.00030029128254406773
+    },
+    {
+      "name": "boundary-exactly-on-velocity_24h",
+      "authorization": {
+        "transaction_id": "9e25fe08252c8127cc6e7d1ad28074fc",
+        "card": "5104807169438134",
+        "event_time": 1380991186,
+        "amount_usd": 143.27
+      },
+      "signals": {
+        "amount": 143.27,
+        "gap_seconds": 12887.0,
+        "velocity_1h": 0.0,
+        "velocity_24h": 4.0
+      },
+      "risk_score": 0.00026602819898909286
+    },
+    {
+      "name": "boundary-first-payment-on-card",
+      "authorization": {
+        "transaction_id": "982311611279f5d34b3b9b30004c6371",
+        "card": "4883407061576",
+        "event_time": 1382646864,
+        "amount_usd": 1041.54
+      },
+      "signals": {
+        "amount": 1041.54,
+        "gap_seconds": null,
+        "velocity_1h": 0.0,
+        "velocity_24h": 0.0
+      },
+      "risk_score": 0.5833333333333334
+    },
+    {
+      "name": "boundary-same-second-tie-break",
+      "authorization": {
+        "transaction_id": "76a6493574ced1ef429f6d5ee8b926ea",
+        "card": "4681601008538160",
+        "event_time": 1381234387,
+        "amount_usd": 2.99
+      },
+      "signals": {
+        "amount": 2.99,
+        "gap_seconds": 0.0,
+        "velocity_1h": 2.0,
+        "velocity_24h": 2.0
+      },
+      "risk_score": 0.0038238306589279624
+    },
+    {
+      "name": "busy-card-high-velocity",
+      "authorization": {
+        "transaction_id": "98590e6fa70d576382e0077adfe2557a",
+        "card": "372520049757633",
+        "event_time": 1386460066,
+        "amount_usd": 20.04
+      },
+      "signals": {
+        "amount": 20.04,
+        "gap_seconds": 68.0,
+        "velocity_1h": 1.0,
+        "velocity_24h": 35.0
+      },
+      "risk_score": 0.00021969974368363237
+    },
+    {
+      "name": "ordinary-0-risk-p0.01",
+      "authorization": {
+        "transaction_id": "b09dc23b9f398fcbad7857b6ba5ed0ce",
+        "card": "676275912597",
+        "event_time": 1387203644,
+        "amount_usd": 80.76
+      },
+      "signals": {
+        "amount": 80.76,
+        "gap_seconds": 100466.0,
+        "velocity_1h": 0.0,
+        "velocity_24h": 0.0
+      },
+      "risk_score": 0.0
+    },
+    {
+      "name": "ordinary-1-risk-p0.25",
+      "authorization": {
+        "transaction_id": "727e03bbe612d0abe11b820cb2ee896b",
+        "card": "30551643947183",
+        "event_time": 1386398561,
+        "amount_usd": 158.36
+      },
+      "signals": {
+        "amount": 158.36,
+        "gap_seconds": 5377.0,
+        "velocity_1h": 0.0,
+        "velocity_24h": 13.0
+      },
+      "risk_score": 1.9601501475012985e-05
+    },
+    {
+      "name": "ordinary-2-risk-p0.5",
+      "authorization": {
+        "transaction_id": "c928b9a7fd4c987ae3319e7c971967c8",
+        "card": "36722699017270",
+        "event_time": 1387564712,
+        "amount_usd": 23.1
+      },
+      "signals": {
+        "amount": 23.1,
+        "gap_seconds": 1232.0,
+        "velocity_1h": 1.0,
+        "velocity_24h": 16.0
+      },
+      "risk_score": 0.00013890175016205206
+    },
+    {
+      "name": "ordinary-3-risk-p0.75",
+      "authorization": {
+        "transaction_id": "1cd2322bd398ce932eadd10677b22ff7",
+        "card": "30561214688470",
+        "event_time": 1387047582,
+        "amount_usd": 9.51
+      },
+      "signals": {
+        "amount": 9.51,
+        "gap_seconds": 5585.0,
+        "velocity_1h": 0.0,
+        "velocity_24h": 12.0
+      },
+      "risk_score": 0.00038109756097560977
+    },
+    {
+      "name": "ordinary-4-risk-p0.95",
+      "authorization": {
+        "transaction_id": "8a95991095d898ac59468c16942b2e4b",
+        "card": "4745996322265",
+        "event_time": 1385404566,
+        "amount_usd": 8.79
+      },
+      "signals": {
+        "amount": 8.79,
+        "gap_seconds": 316.0,
+        "velocity_1h": 1.0,
+        "velocity_24h": 5.0
+      },
+      "risk_score": 0.008438818565400843
+    },
+    {
+      "name": "ordinary-5-risk-p0.999",
+      "authorization": {
+        "transaction_id": "7be7b08f18ec5a80a54da30b3a2d6387",
+        "card": "30404291151692",
+        "event_time": 1387208710,
+        "amount_usd": 1229.49
+      },
+      "signals": {
+        "amount": 1229.49,
+        "gap_seconds": 12.0,
+        "velocity_1h": 1.0,
+        "velocity_24h": 3.0
+      },
+      "risk_score": 0.49723756906077365
+    }
+  ]
+}
