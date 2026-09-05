@@ -1,0 +1,7 @@
+# Training-side only. Nothing here runs on the decision path: Python trains the
+# model and never sees a live authorization (ADR-0005).
+lightgbm==4.7.0
+numpy==2.5.2
+pandas==3.0.5
+scikit-learn==1.9.0
+scipy==1.18.1

@@ -1,2 +1,13 @@
 node_modules
 .env
+.venv/
+.DS_Store
+__pycache__/
+
+# The raw Kaggle CSVs are ~478MB; see README for how to fetch them.
+data/*.csv
+# ...except the slice of card history the train/serve fixture replays against.
+!data/fixture_payments.csv
+
+# Written by the tracer bullet at run time.
+history/

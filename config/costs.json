@@ -1,0 +1,20 @@
+{
+  "comment": [
+    "The cost inputs are chosen, not measured. No dataset in this repo can supply",
+    "them, so they live here where the choice is visible rather than buried in code",
+    "(ADR-0003). What matters is not any single number but how far the decision mix",
+    "moves across plausible ranges; `make sweep` reports that.",
+    "All money is US dollars."
+  ],
+
+  "fraud_loss_multiple": 1.0,
+  "chargeback_fee": 25.0,
+
+  "false_decline_fixed": 8.0,
+  "false_decline_rate": 0.02,
+
+  "challenge_cost": 1.5,
+  "challenge_abandon_rate": 0.12,
+
+  "base_fraud_rate": 0.00521
+}
