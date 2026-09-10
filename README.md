@@ -43,6 +43,10 @@ internal/signals/   the recency check gap and the two velocity counters
 internal/risk/      the LightGBM reader and the calibration stage
 internal/decisioning/  the expected-cost arithmetic
 internal/history/   durable history, written behind the response
+internal/heuristics/   the four rules explored in ADR-0007
+internal/stream/       Kafka in and out, and the in-process fake
+internal/pipeline/     the consume-assess-route-commit loop
+cmd/pipeline/          the Kafka pipeline: authorizations in, two topics out
 training/           Python: trains the model, exports artifacts and the fixture
 artifacts/          model.txt and calibration.json, loaded once at startup
 testdata/           the train/serve fixture
@@ -76,6 +80,46 @@ velocity window boundary.
 
 Regenerate it with `make train`. A change to it is a change in signal semantics
 and should be read as one in review.
+
+## The Kafka heuristic pipeline
+
+A second, separate path explored on this branch and recorded in
+[ADR-0007](docs/adr/0007-kafka-heuristic-pipeline.md): a Kafka consumer that
+scores authorizations with four hand-written rules and routes each one to an
+`approved` or a `review` topic.
+
+```
+make pipeline-demo
+```
+
+runs the whole loop with no broker at all -- an in-process fake stands in for
+Kafka -- so it works on a fresh clone the way `make score` does. Against a real
+broker:
+
+```
+make pipeline-up     # single-broker Kafka in Docker, KRaft, no ZooKeeper
+make pipeline-seed   # fill the input topic with synthetic authorizations
+make pipeline        # consume, score, route
+make pipeline-down
+```
+
+The four rules are `rapid_succession`, `hourly_velocity`, `daily_velocity` and
+`large_amount`. Each carries points; the total decides the topic. Thresholds are
+in [`config/thresholds.json`](config/thresholds.json) with their evidence beside
+them -- two are grounded in this repo's reconnaissance runs and two are chosen,
+and the file says which is which.
+
+**This is not the decision path this repo argues for**, and it contradicts three
+accepted ADRs: thresholds instead of expected cost (ADR-0003), Kafka on the path
+rather than behind it (ADR-0004), and the revival of the very gap threshold
+ADR-0006 measured as net-harmful. ADR-0007 exists to say so and to give the one
+argument that makes it defensible: nothing here declines. A rule at five times
+base rate is worth an analyst's minute, which is what routing to a queue costs.
+It was never worth a false decline, which is what ADR-0006 killed it for.
+
+The rules read signals derived by `internal/signals` -- the same derivation the
+model reads -- so a rule cannot quietly disagree with the model about what "the
+gap" means.
 
 ## Retraining
 

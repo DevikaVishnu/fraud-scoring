@@ -1,0 +1,28 @@
+{
+  "comment": [
+    "Tuned numbers for the heuristic pipeline explored in ADR-0007. They live",
+    "here for the same reason the cost inputs do: they are a choice, and a choice",
+    "belongs where it is visible rather than buried in code.",
+    "",
+    "Two of them are grounded in this repo's own reconnaissance runs and two are",
+    "not, which is stated rather than smoothed over:",
+    "  rapid_succession_seconds  ADR-0006 measured gaps under 5s at 2.9% precision",
+    "                            against a 0.516% base rate. Real lift, far too",
+    "                            weak to decline on -- which is why it routes.",
+    "  hourly_velocity_at        ADR-0002: the busiest card in this data reaches 9",
+    "  daily_velocity_at         payments in an hour and 36 in a day. These sit",
+    "                            below those ceilings so the rules fire on the tail.",
+    "  large_amount_usd          Chosen. No run in this repo establishes it.",
+    "  review_at                 Chosen. 40 means any single strong rule is enough",
+    "                            to route, since review costs analyst time and not",
+    "                            a turned-away cardholder.",
+    "All money is US dollars."
+  ],
+
+  "rapid_succession_seconds": 5,
+  "hourly_velocity_at": 5,
+  "daily_velocity_at": 20,
+  "large_amount_usd": 1000,
+
+  "review_at": 40
+}

@@ -2,7 +2,10 @@ module github.com/DevikaVishnu/fraud-scoring
 
 go 1.24.9
 
-require github.com/parquet-go/parquet-go v0.32.0
+require (
+	github.com/parquet-go/parquet-go v0.32.0
+	github.com/segmentio/kafka-go v0.4.51
+)
 
 require (
 	github.com/andybalholm/brotli v1.1.1 // indirect
